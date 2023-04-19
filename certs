@@ -1,0 +1,21 @@
+#
+#   To install a sensor
+#     https://docs.digicert.com/certificate-tools/discovery-user-guide/installing-sensor/docker-install-sensor/
+#   Sensor installation requirements
+#     https://docs.digicert.com/certificate-tools/discovery-user-guide/sensor-installation-requirements/#docker-engine-190313-and-later
+
+version: '3.7'
+services:
+  sensor:
+    image: digicertinc/digicert-sensor:latest
+    ports:
+      - "8088:8080"
+    volumes:
+      - "./sensor_home/:/usr/local/digicert/sensor/mounts/"
+    entrypoint: >
+         /usr/local/digicert/sensor/start.sh
+         -u username
+         -p passsword
+         -d "divisionName"
+         -s sensorName
+    stop_grace_period: 30s
